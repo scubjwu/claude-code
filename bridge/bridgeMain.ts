@@ -2346,7 +2346,7 @@ export async function bridgeMain(args: string[]): Promise<void> {
   const api = createBridgeApiClient({
     baseUrl,
     getAccessToken: getBridgeAccessToken,
-    runnerVersion: MACRO.VERSION,
+    runnerVersion: '1.0.0-e2e',
     onDebug: logForDebugging,
     onAuth401: handleOAuth401Error,
     getTrustedDeviceToken,
@@ -2896,7 +2896,7 @@ export async function runBridgeHeadless(
   const api = createBridgeApiClient({
     baseUrl,
     getAccessToken: opts.getAccessToken,
-    runnerVersion: MACRO.VERSION,
+    runnerVersion: '1.0.0-e2e',
     onDebug: log,
     onAuth401: opts.onAuth401,
     getTrustedDeviceToken,

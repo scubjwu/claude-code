@@ -215,7 +215,7 @@ function getSimpleDoingTasksSection(): string {
 
   const userHelpSubitems = [
     `/help: Get help with using Claude Code`,
-    `To give feedback, users should ${MACRO.ISSUES_EXPLAINER}`,
+    `To give feedback, users should ${'github'}`,
   ]
 
   const items = [

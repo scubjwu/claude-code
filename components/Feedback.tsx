@@ -211,7 +211,7 @@ export function Feedback({
       platform: env.platform,
       gitRepo: envInfo.isGit,
       terminal: env.terminal,
-      version: MACRO.VERSION,
+      version: '1.0.0-e2e',
       transcript: normalizeMessagesForAPI(messages),
       errors: sanitizedErrors,
       lastApiRequest: getLastAPIRequest(),
@@ -343,7 +343,7 @@ export function Feedback({
             <Text>
               - Environment info:{' '}
               <Text dimColor>
-                {env.platform}, {env.terminal}, v{MACRO.VERSION}
+                {env.platform}, {env.terminal}, v{'1.0.0-e2e'}
               </Text>
             </Text>
             {envInfo.gitState && <Text>
@@ -396,7 +396,7 @@ export function createGitHubIssueUrl(feedbackId: string, title: string, descript
 }>): string {
   const sanitizedTitle = redactSensitiveInfo(title);
   const sanitizedDescription = redactSensitiveInfo(description);
-  const bodyPrefix = `**Bug Description**\n${sanitizedDescription}\n\n` + `**Environment Info**\n` + `- Platform: ${env.platform}\n` + `- Terminal: ${env.terminal}\n` + `- Version: ${MACRO.VERSION || 'unknown'}\n` + `- Feedback ID: ${feedbackId}\n` + `\n**Errors**\n\`\`\`json\n`;
+  const bodyPrefix = `**Bug Description**\n${sanitizedDescription}\n\n` + `**Environment Info**\n` + `- Platform: ${env.platform}\n` + `- Terminal: ${env.terminal}\n` + `- Version: ${'1.0.0-e2e' || 'unknown'}\n` + `- Feedback ID: ${feedbackId}\n` + `\n**Errors**\n\`\`\`json\n`;
   const errorSuffix = `\n\`\`\`\n`;
   const errorsJson = jsonStringify(errors);
   const baseUrl = `${GITHUB_ISSUES_REPO_URL}/new?title=${encodeURIComponent(sanitizedTitle)}&labels=user-reported,bug&body=`;

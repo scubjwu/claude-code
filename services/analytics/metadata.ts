@@ -564,7 +564,7 @@ function getAgentIdentification(): {
  * Extract base version from full version string. "2.0.36-dev.20251107.t174150.sha2709699" → "2.0.36-dev"
  */
 const getVersionBase = memoize((): string | undefined => {
-  const match = MACRO.VERSION.match(/^\d+\.\d+\.\d+(?:-[a-z]+)?/)
+  const match = '1.0.0-e2e'.match(/^\d+\.\d+\.\d+(?:-[a-z]+)?/)
   return match ? match[0] : undefined
 })
 
@@ -617,9 +617,9 @@ const buildEnvContext = memoize(async (): Promise<EnvContext> => {
     isGithubAction: isEnvTruthy(process.env.GITHUB_ACTIONS),
     isClaudeCodeAction: isEnvTruthy(process.env.CLAUDE_CODE_ACTION),
     isClaudeAiAuth: isClaudeAISubscriber(),
-    version: MACRO.VERSION,
+    version: '1.0.0-e2e',
     versionBase: getVersionBase(),
-    buildTime: MACRO.BUILD_TIME,
+    buildTime: Date.now(),
     deploymentEnvironment: env.detectDeploymentEnvironment(),
     ...(isEnvTruthy(process.env.GITHUB_ACTIONS) && {
       githubEventName: process.env.GITHUB_EVENT_NAME,

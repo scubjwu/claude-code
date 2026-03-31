@@ -515,9 +515,9 @@ async function updateLatest(
         `Native installer: maxVersion ${maxVersion} is set, capping update from ${version} to ${maxVersion}`,
       )
       // If we're already at or above maxVersion, skip the update entirely
-      if (gte(MACRO.VERSION, maxVersion)) {
+      if (gte('1.0.0-e2e', maxVersion)) {
         logForDebugging(
-          `Native installer: current version ${MACRO.VERSION} is already at or above maxVersion ${maxVersion}, skipping update`,
+          `Native installer: current version ${'1.0.0-e2e'} is already at or above maxVersion ${maxVersion}, skipping update`,
         )
         logEvent('tengu_native_update_skipped_max_version', {
           latency_ms: Date.now() - startTime,
@@ -537,7 +537,7 @@ async function updateLatest(
   // is invalid (e.g., empty/corrupted from a failed install), or we're running via npx.
   if (
     !forceReinstall &&
-    version === MACRO.VERSION &&
+    version === '1.0.0-e2e' &&
     (await versionIsAvailable(version)) &&
     (await isPossibleClaudeBinary(executablePath))
   ) {
@@ -1675,9 +1675,9 @@ export async function cleanupNpmInstallations(): Promise<{
     errors.push(codePackageResult.error)
   }
 
-  // Also attempt to remove MACRO.PACKAGE_URL if it's defined and different
-  if (MACRO.PACKAGE_URL && MACRO.PACKAGE_URL !== '@anthropic-ai/claude-code') {
-    const macroPackageResult = await attemptNpmUninstall(MACRO.PACKAGE_URL)
+  // Also attempt to remove 'claude-code-e2e' if it's defined and different
+  if ('claude-code-e2e' && 'claude-code-e2e' !== '@anthropic-ai/claude-code') {
+    const macroPackageResult = await attemptNpmUninstall('claude-code-e2e')
     if (macroPackageResult.success) {
       removed++
       if (macroPackageResult.warning) {

@@ -35,7 +35,7 @@ export async function getLatestVersionFromArtifactory(
     'npm',
     [
       'view',
-      `${MACRO.NATIVE_PACKAGE_URL}@${tag}`,
+      `${'claude-code-e2e'}@${tag}`,
       'version',
       '--prefer-online',
       '--registry',
@@ -65,7 +65,7 @@ export async function getLatestVersionFromArtifactory(
     source_npm: true,
   })
   logForDebugging(
-    `npm view ${MACRO.NATIVE_PACKAGE_URL}@${tag} version: ${stdout}`,
+    `npm view ${'claude-code-e2e'}@${tag} version: ${stdout}`,
   )
   const latestVersion = stdout.trim()
   return latestVersion
@@ -159,7 +159,7 @@ export async function downloadVersionFromArtifactory(
 
   // Get the platform-specific package name
   const platform = getPlatform()
-  const platformPackageName = `${MACRO.NATIVE_PACKAGE_URL}-${platform}`
+  const platformPackageName = `${'claude-code-e2e'}-${platform}`
 
   // Fetch integrity hash for the platform-specific package
   logForDebugging(
@@ -204,7 +204,7 @@ export async function downloadVersionFromArtifactory(
     name: 'claude-native-installer',
     version: '0.0.1',
     dependencies: {
-      [MACRO.NATIVE_PACKAGE_URL!]: version,
+      ['claude-code-e2e'!]: version,
     },
   }
 
@@ -219,10 +219,10 @@ export async function downloadVersionFromArtifactory(
         name: 'claude-native-installer',
         version: '0.0.1',
         dependencies: {
-          [MACRO.NATIVE_PACKAGE_URL!]: version,
+          ['claude-code-e2e'!]: version,
         },
       },
-      [`node_modules/${MACRO.NATIVE_PACKAGE_URL}`]: {
+      [`node_modules/${'claude-code-e2e'}`]: {
         version: version,
         optionalDependencies: {
           [platformPackageName]: version,
@@ -264,7 +264,7 @@ export async function downloadVersionFromArtifactory(
   }
 
   logForDebugging(
-    `Successfully downloaded and verified ${MACRO.NATIVE_PACKAGE_URL}@${version}`,
+    `Successfully downloaded and verified ${'claude-code-e2e'}@${version}`,
   )
 }
 

@@ -29,7 +29,7 @@ import { getInitialSettings } from 'src/utils/settings/settings.js'
 
 export async function update() {
   logEvent('tengu_update_check', {})
-  writeToStdout(`Current version: ${MACRO.VERSION}\n`)
+  writeToStdout(`Current version: ${'1.0.0-e2e'}\n`)
 
   const channel = getInitialSettings()?.autoUpdatesChannel ?? 'latest'
   writeToStdout(`Checking for updates to ${channel} version...\n`)
@@ -122,8 +122,8 @@ export async function update() {
     if (packageManager === 'homebrew') {
       writeToStdout('Claude is managed by Homebrew.\n')
       const latest = await getLatestVersion(channel)
-      if (latest && !gte(MACRO.VERSION, latest)) {
-        writeToStdout(`Update available: ${MACRO.VERSION} → ${latest}\n`)
+      if (latest && !gte('1.0.0-e2e', latest)) {
+        writeToStdout(`Update available: ${'1.0.0-e2e'} → ${latest}\n`)
         writeToStdout('\n')
         writeToStdout('To update, run:\n')
         writeToStdout(chalk.bold('  brew upgrade claude-code') + '\n')
@@ -133,8 +133,8 @@ export async function update() {
     } else if (packageManager === 'winget') {
       writeToStdout('Claude is managed by winget.\n')
       const latest = await getLatestVersion(channel)
-      if (latest && !gte(MACRO.VERSION, latest)) {
-        writeToStdout(`Update available: ${MACRO.VERSION} → ${latest}\n`)
+      if (latest && !gte('1.0.0-e2e', latest)) {
+        writeToStdout(`Update available: ${'1.0.0-e2e'} → ${latest}\n`)
         writeToStdout('\n')
         writeToStdout('To update, run:\n')
         writeToStdout(
@@ -146,8 +146,8 @@ export async function update() {
     } else if (packageManager === 'apk') {
       writeToStdout('Claude is managed by apk.\n')
       const latest = await getLatestVersion(channel)
-      if (latest && !gte(MACRO.VERSION, latest)) {
-        writeToStdout(`Update available: ${MACRO.VERSION} → ${latest}\n`)
+      if (latest && !gte('1.0.0-e2e', latest)) {
+        writeToStdout(`Update available: ${'1.0.0-e2e'} → ${latest}\n`)
         writeToStdout('\n')
         writeToStdout('To update, run:\n')
         writeToStdout(chalk.bold('  apk upgrade claude-code') + '\n')
@@ -236,14 +236,14 @@ export async function update() {
         await gracefulShutdown(1)
       }
 
-      if (result.latestVersion === MACRO.VERSION) {
+      if (result.latestVersion === '1.0.0-e2e') {
         writeToStdout(
-          chalk.green(`Claude Code is up to date (${MACRO.VERSION})`) + '\n',
+          chalk.green(`Claude Code is up to date (${'1.0.0-e2e'})`) + '\n',
         )
       } else {
         writeToStdout(
           chalk.green(
-            `Successfully updated from ${MACRO.VERSION} to version ${result.latestVersion}`,
+            `Successfully updated from ${'1.0.0-e2e'} to version ${result.latestVersion}`,
           ) + '\n',
         )
         await regenerateCompletionCache()
@@ -265,9 +265,9 @@ export async function update() {
   }
 
   logForDebugging('update: Checking npm registry for latest version')
-  logForDebugging(`update: Package URL: ${MACRO.PACKAGE_URL}`)
+  logForDebugging(`update: Package URL: ${'claude-code-e2e'}`)
   const npmTag = channel === 'stable' ? 'stable' : 'latest'
-  const npmCommand = `npm view ${MACRO.PACKAGE_URL}@${npmTag} version`
+  const npmCommand = `npm view ${'claude-code-e2e'}@${npmTag} version`
   logForDebugging(`update: Running: ${npmCommand}`)
   const latestVersion = await getLatestVersion(channel)
   logForDebugging(
@@ -283,7 +283,7 @@ export async function update() {
     process.stderr.write('  • Network connectivity issues\n')
     process.stderr.write('  • npm registry is unreachable\n')
     process.stderr.write('  • Corporate proxy/firewall blocking npm\n')
-    if (MACRO.PACKAGE_URL && !MACRO.PACKAGE_URL.startsWith('@anthropic')) {
+    if ('claude-code-e2e' && !'claude-code-e2e'.startsWith('@anthropic')) {
       process.stderr.write(
         '  • Internal/development build not published to npm\n',
       )
@@ -293,7 +293,7 @@ export async function update() {
     process.stderr.write('  • Check your internet connection\n')
     process.stderr.write('  • Run with --debug flag for more details\n')
     const packageName =
-      MACRO.PACKAGE_URL ||
+      'claude-code-e2e' ||
       (process.env.USER_TYPE === 'ant'
         ? '@anthropic-ai/claude-cli'
         : '@anthropic-ai/claude-code')
@@ -306,15 +306,15 @@ export async function update() {
   }
 
   // Check if versions match exactly, including any build metadata (like SHA)
-  if (latestVersion === MACRO.VERSION) {
+  if (latestVersion === '1.0.0-e2e') {
     writeToStdout(
-      chalk.green(`Claude Code is up to date (${MACRO.VERSION})`) + '\n',
+      chalk.green(`Claude Code is up to date (${'1.0.0-e2e'})`) + '\n',
     )
     await gracefulShutdown(0)
   }
 
   writeToStdout(
-    `New version available: ${latestVersion} (current: ${MACRO.VERSION})\n`,
+    `New version available: ${latestVersion} (current: ${'1.0.0-e2e'})\n`,
   )
   writeToStdout('Installing update...\n')
 
@@ -374,7 +374,7 @@ export async function update() {
     case 'success':
       writeToStdout(
         chalk.green(
-          `Successfully updated from ${MACRO.VERSION} to version ${latestVersion}`,
+          `Successfully updated from ${'1.0.0-e2e'} to version ${latestVersion}`,
         ) + '\n',
       )
       await regenerateCompletionCache()
@@ -386,7 +386,7 @@ export async function update() {
       if (useLocalUpdate) {
         process.stderr.write('Try manually updating with:\n')
         process.stderr.write(
-          `  cd ~/.claude/local && npm update ${MACRO.PACKAGE_URL}\n`,
+          `  cd ~/.claude/local && npm update ${'claude-code-e2e'}\n`,
         )
       } else {
         process.stderr.write('Try running with sudo or fix npm permissions\n')
@@ -401,7 +401,7 @@ export async function update() {
       if (useLocalUpdate) {
         process.stderr.write('Try manually updating with:\n')
         process.stderr.write(
-          `  cd ~/.claude/local && npm update ${MACRO.PACKAGE_URL}\n`,
+          `  cd ~/.claude/local && npm update ${'claude-code-e2e'}\n`,
         )
       } else {
         process.stderr.write(

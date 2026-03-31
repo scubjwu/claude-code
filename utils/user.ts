@@ -105,7 +105,7 @@ export const getCoreUserData = memoize(
       deviceId,
       sessionId: getSessionId(),
       email: getEmail(),
-      appVersion: MACRO.VERSION,
+      appVersion: '1.0.0-e2e',
       platform: getHostPlatformForAnalytics(),
       organizationUuid,
       accountUuid,

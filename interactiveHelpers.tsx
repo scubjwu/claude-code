@@ -33,7 +33,7 @@ export function completeOnboarding(): void {
   saveGlobalConfig(current => ({
     ...current,
     hasCompletedOnboarding: true,
-    lastOnboardingVersion: MACRO.VERSION
+    lastOnboardingVersion: '1.0.0-e2e'
   }));
 }
 export function showDialog<T = void>(root: Root, renderer: (done: (result: T) => void) => React.ReactNode): Promise<T> {

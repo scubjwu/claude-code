@@ -89,12 +89,12 @@ export function NativeAutoUpdater({
     try {
       // Check if current version is above the max allowed version
       const maxVersion = await getMaxVersion();
-      if (maxVersion && gt(MACRO.VERSION, maxVersion)) {
+      if (maxVersion && gt('1.0.0-e2e', maxVersion)) {
         const msg = await getMaxVersionMessage();
         setMaxVersionIssue(msg ?? 'affects your version');
       }
       const result = await installLatest(channel);
-      const currentVersion = MACRO.VERSION;
+      const currentVersion = '1.0.0-e2e';
       const latencyMs = Date.now() - startTime;
 
       // Handle lock contention gracefully - just return without treating as error

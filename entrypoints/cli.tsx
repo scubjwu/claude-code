@@ -35,9 +35,9 @@ async function main(): Promise<void> {
 
   // Fast-path for --version/-v: zero module loading needed
   if (args.length === 1 && (args[0] === '--version' || args[0] === '-v' || args[0] === '-V')) {
-    // MACRO.VERSION is inlined at build time
+    // '1.0.0-e2e' is inlined at build time
     // biome-ignore lint/suspicious/noConsole:: intentional console output
-    console.log(`${MACRO.VERSION} (Claude Code)`);
+    console.log(`${'1.0.0-e2e'} (Claude Code)`);
     return;
   }
 

@@ -1,9 +1,7 @@
-import {
-  ColorDiff,
-  ColorFile,
-  getSyntaxTheme as nativeGetSyntaxTheme,
-  type SyntaxTheme,
-} from 'color-diff-napi'
+export type SyntaxTheme = any;
+const ColorDiff: any = null;
+const ColorFile: any = null;
+const nativeGetSyntaxTheme: any = () => null;
 import { isEnvDefinedFalsy } from '../../utils/envUtils.js'
 
 export type ColorModuleUnavailableReason = 'env'
@@ -16,10 +14,7 @@ export type ColorModuleUnavailableReason = 'env'
  * disable it is via the env var.
  */
 export function getColorModuleUnavailableReason(): ColorModuleUnavailableReason | null {
-  if (isEnvDefinedFalsy(process.env.CLAUDE_CODE_SYNTAX_HIGHLIGHT)) {
-    return 'env'
-  }
-  return null
+  return 'env'
 }
 
 export function expectColorDiff(): typeof ColorDiff | null {

@@ -299,7 +299,7 @@ export function createBridgeLogger(options: {
       regenerateQr(connectUrl)
 
       if (verbose) {
-        write(chalk.dim(`Remote Control`) + ` v${MACRO.VERSION}\n`)
+        write(chalk.dim(`Remote Control`) + ` v${'1.0.0-e2e'}\n`)
       }
       if (verbose) {
         if (config.spawnMode !== 'single-session') {
