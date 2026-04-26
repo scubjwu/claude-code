@@ -18,31 +18,26 @@ curl -fsSL https://bun.sh/install | bash
 ```
 
 ### Installation
-Clone the repository and install the dependencies:
+Clone the repository and automatically configure the CLI runner globally:
 ```bash
-bun install
+./build.sh
 ```
 
-### Usage
-Run the assistant securely via the CLI. Define your desired LLM Provider along with the corresponding API key as environment variables.
+### Configuration & Usage
+You can run the assistant securely by defining your intended Provider alongside your API Key.
+To avoid passing these globally during execution, simply create a persistent configuration file at your home directory (`~/.claude_env`):
 
-**Using OpenAI (GPT-4o)**:
-```bash
-export AI_PROVIDER="openai"
-export OPENAI_API_KEY="sk-your-openai-api-key"
-
-bun run main.tsx -p "hello, who are you?"
+```env
+# ~/.claude_env
+AI_PROVIDER=openai
+OPENAI_API_KEY=sk-your-openai-api-key
 ```
 
-**Using Anthropic (Claude 3.5 Sonnet)**:
+After configuring this once, you can fire up the globally linked executable anywhere on your machine!
+
 ```bash
-export AI_PROVIDER="anthropic"
-export ANTHROPIC_API_KEY="sk-ant-your-anthropic-api-key"
-
-bun run main.tsx -p "hello, who are you?"
+claude -p "hello, who are you?"
 ```
-
-*Note: You can also use `bun link` to bind the executable globally as `claude`.*
 
 ## System Design & Architecture Workflow
 

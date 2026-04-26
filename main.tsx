@@ -22,7 +22,27 @@ startKeychainPrefetch();
 import { feature } from 'bun:bundle';
 import { Command as CommanderCommand, InvalidArgumentError, Option } from '@commander-js/extra-typings';
 import chalk from 'chalk';
-import { readFileSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
+import { homedir } from 'os';
+import { join } from 'path';
+
+// Load global configuration manually
+const globalEnvPath = join(homedir(), '.claude_env');
+if (existsSync(globalEnvPath)) {
+  const envContent = readFileSync(globalEnvPath, 'utf-8');
+  envContent.split('\n').forEach(line => {
+    const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+    if (match) {
+      const key = match[1];
+      let value = match[2] || '';
+      if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
+      else if (value.startsWith("'") && value.endsWith("'")) value = value.slice(1, -1);
+      if (!process.env[key]) {
+        process.env[key] = value;
+      }
+    }
+  });
+}
 import mapValues from 'lodash-es/mapValues.js';
 import pickBy from 'lodash-es/pickBy.js';
 import uniqBy from 'lodash-es/uniqBy.js';
